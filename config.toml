@@ -1,0 +1,60 @@
+# 服务器配置
+[server]
+address = "0.0.0.0" # 监听地址
+port = 8080         # 监听端口
+read_timeout = 10   # 读超时时间（秒）
+write_timeout = 10  # 写超时时间（秒）
+
+# PostgreSQL 数据库配置
+[postgres]
+host = "localhost"
+port = 5432
+user = "postgres"
+password = "MyNewPass4!"
+dbname = "test"
+sslmode = "disable" # 或 "require" 如果需要SSL连接
+max_open = 101 # 最大连接数
+max_idle = 50 # 最大空闲连接数
+
+
+# MySQL 数据库配置
+[mysql]
+host = "localhost"           # 数据库服务器地址
+port = 3306             # 数据库端口，默认MySQL端口
+user = "your_user"       # 数据库用户名
+password = "your_password" # 数据库密码
+dbname = "your_dbname"   # 数据库名称
+charset = "utf8mb4"    # 字符集，默认推荐使用utf8mb4支持emoji表情
+sslmode = "true"      # 是否启用SSL连接，根据需要可以设置为true/false或"skip-verify"
+
+# Redis 缓存配置
+[redis]
+address = "localhost:6379"
+password = ""
+db = 0
+pool_size = 10
+
+# Kafka 消息队列配置
+[kafka]
+brokers = ["localhost:9092", "localhost2:9092", "localhost3:9092"] # Kafka集群地址列表
+group_id = "your_group_id"
+topics = ["your_topic_name"] # 订阅的主题列表
+
+# 日志配置
+[logging]
+level = "info" # 日志级别：debug, info, warn, error, fatal
+format = "text" # 输出格式：text 或 json
+filename = "app.log" # 日志文件名
+max_size = 100 # 单个日志文件最大大小（MB）
+max_backups = 3 # 保留旧文件的最大数量
+max_age = 7 # 旧文件保留的天数
+
+# 监控和日志
+[monitoring]
+prometheus_endpoint = "/metrics"
+log_format = "json"
+
+# 认证配置
+[auth]
+jwt_secret = "my-secret-key"
+jwt_expiration = "24h"
