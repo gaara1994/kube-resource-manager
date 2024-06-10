@@ -1,20 +1,15 @@
 package models
 
-import "github.com/jinzhu/gorm"
+import (
+	"github.com/jinzhu/gorm"
+)
 
-// User represents the User model with comments for each field.
+// User 代表用户模型
 type User struct {
 	gorm.Model
-	// 用户邮箱，唯一标识，不可为空
-	Email string `gorm:"type:varchar(100);unique_index;not null;comment:邮箱" json:"email"`
-	// 用户名，唯一，长度限制50字符，不可为空
-	Username string `gorm:"type:varchar(50);unique_index;not null;comment:用户名" json:"username"`
-	// 加密后的用户密码，不可为空
-	Password string `gorm:"type:varchar(100);not null;comment:密码" json:"-"`
-	// 用户名，长度限制50字符，不可为空
-	FirstName string `gorm:"type:varchar(50);not null;comment:名" json:"first_name"`
-	// 用户姓，长度限制50字符，不可为空
-	LastName string `gorm:"type:varchar(50);not null;comment:姓" json:"last_name"`
+	Username     string `gorm:"column:user_name;not null;uniqueIndex;comment:用户名"` // 用户名，设置为唯一索引
+	PasswordHash string `gorm:"column:password_hash;not null;comment:密码散列值"`       // 密码散列值
+	Email        string `gorm:"column:email;comment:邮箱"`                           // 邮箱，设置为唯一索引
 }
 
 // BeforeSave is a GORM callback, used for operations like hashing the password before saving.

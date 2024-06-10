@@ -4,6 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"kube-resource-manager/cmd"
 	"kube-resource-manager/config"
+	"kube-resource-manager/internal/db/migration"
 	"kube-resource-manager/pkg/logger"
 	"kube-resource-manager/routes"
 	"log"
@@ -22,6 +23,14 @@ func main() {
 		log.Fatalf(err.Error())
 	}
 
+	//初始化日志
+	err = migration.InitDb()
+	if err != nil {
+		logger.Log.Error(err.Error())
+	}
+
+	//设置模式
+	gin.SetMode(config.Config.Server.Mode)
 	// 启动HTTP服务器
 	r := gin.Default()
 	routes.InitRoutes(r)

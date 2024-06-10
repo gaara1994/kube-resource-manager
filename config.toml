@@ -2,6 +2,7 @@
 [server]
 address = "0.0.0.0" # 监听地址
 port = 8080         # 监听端口
+Mode = "debug"      # 调试模式 debug;发布模式 release;测试模式 test
 read_timeout = 10   # 读超时时间（秒）
 write_timeout = 10  # 写超时时间（秒）
 
