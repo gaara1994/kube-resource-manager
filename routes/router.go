@@ -19,10 +19,10 @@ func InitRoutes(r *gin.Engine) {
 		{
 			//服务器集群 Server cluster
 			v1.GET("/cluster/:id", KubernetesClusterCtl.GET)
-			v1.POST("/cluster")
-			v1.PUT("/cluster")
-			v1.DELETE("/cluster")
-			v1.GET("/cluster/list")
+			v1.POST("/cluster", KubernetesClusterCtl.POST)
+			v1.PUT("/cluster", KubernetesClusterCtl.PUT)
+			v1.DELETE("/cluster/:id", KubernetesClusterCtl.DELETE)
+			v1.GET("/cluster/list", KubernetesClusterCtl.QueryList)
 
 			//资源分类
 			v1.GET("/resource/type")

@@ -4,7 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"kube-resource-manager/cmd"
 	"kube-resource-manager/config"
-	"kube-resource-manager/internal/db/migration"
+	"kube-resource-manager/internal/db"
 	"kube-resource-manager/pkg/logger"
 	"kube-resource-manager/routes"
 	"log"
@@ -23,8 +23,8 @@ func main() {
 		log.Fatalf(err.Error())
 	}
 
-	//初始化日志
-	err = migration.InitDb()
+	//初始化数据库
+	err = db.InitDb()
 	if err != nil {
 		logger.Log.Error(err.Error())
 	}
