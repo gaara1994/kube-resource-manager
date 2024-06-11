@@ -4,7 +4,6 @@ import (
 	"github.com/gin-gonic/gin"
 	"kube-resource-manager/internal/response"
 	"kube-resource-manager/pkg/logger"
-	"net/http"
 	"strconv"
 )
 
@@ -16,8 +15,8 @@ func (k *KubernetesClusterController) GET(c *gin.Context) {
 	id, err := strconv.Atoi(idStr)
 	if err != nil {
 		logger.Log.Error("id参数错误")
-		c.JSON(http.StatusBadRequest, response.ErrorResponse(response.ClusterErrGet, response.ClusterErrMsg[response.ClusterErrGet]))
+		response.ErrorResponseWithMessage(c, response.ClusterErrGet, response.ClusterErrMsg[response.ClusterErrGet])
 		return
 	}
-	c.JSON(http.StatusOK, response.SuccessResponse(id))
+	response.SuccessResponseWithMessage(c, id)
 }
