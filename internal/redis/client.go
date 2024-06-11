@@ -8,8 +8,9 @@ import (
 var rdb *redis.Client
 
 func InitRedis() {
-	// 使用环境变量或配置文件中的 Redis 连接信息
-	opt, err := redis.ParseURL("redis://localhost:6379")
+	// go test 使用固定的。使用配置文件需要全局启动，否则配置为空
+	//url := fmt.Sprintf("redis://:%s@%s",config.Config.Redis.Password,config.Config.Redis.Address)
+	opt, err := redis.ParseURL("redis://:123456@localhost:6379")
 	if err != nil {
 		log.Fatalf("Error parsing Redis URL: %v", err)
 	}
