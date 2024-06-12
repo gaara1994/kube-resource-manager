@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
 	"kube-resource-manager/internal/dao"
@@ -10,7 +9,6 @@ import (
 	"kube-resource-manager/internal/errcodes"
 	"kube-resource-manager/internal/response"
 	"strconv"
-	"strings"
 )
 
 type KubernetesClusterController struct {
@@ -57,7 +55,7 @@ func (k *KubernetesClusterController) POST(c *gin.Context) {
 		response.HandleErrorAndRespond(c, err, errcodes.ClusterErrPost, errcodes.ClusterErrMsg[errcodes.ClusterErrPost])
 		return
 	}
-	response.SuccessResponseWithMessage(c, 1)
+	response.SuccessResponseWithMessage(c, nil)
 }
 
 func (k *KubernetesClusterController) PUT(c *gin.Context) {
@@ -112,51 +110,13 @@ func (k *KubernetesClusterController) QueryList(c *gin.Context) {
 	clusterName := c.Query("cluster_name")
 	description := c.Query("description")
 	status := c.Query("status")
+	page, _ := strconv.Atoi(c.Query("page"))
+	pageSize, _ := strconv.Atoi(c.Query("page_size"))
 
-	queryConditions := make([]string, 0)
-	queryValues := make([]interface{}, 0)
-
-	// cluster_name 的处理
-	if clusterName != "" {
-		keyword := "%" + clusterName + "%"
-		queryConditions = append(queryConditions, "cluster_name LIKE ?")
-		queryValues = append(queryValues, keyword)
+	list, err := dao.KubernetesClusterDao.List(clusterName, description, status, page, pageSize)
+	if err != nil {
+		response.HandleErrorAndRespond(c, err, errcodes.ClusterErrQueryList, errcodes.ClusterErrMsg[errcodes.ClusterErrQueryList])
+		return
 	}
-
-	// description 的处理
-	if description != "" {
-		keyword := "%" + description + "%"
-		if len(queryConditions) > 0 { // 非第一个条件时添加AND
-			queryConditions = append(queryConditions, "AND description LIKE ?")
-		} else {
-			queryConditions = append(queryConditions, "description LIKE ?")
-		}
-		queryValues = append(queryValues, keyword)
-	}
-
-	// status 的处理
-	if status != "" {
-		if len(queryConditions) > 0 { // 非第一个条件时添加AND
-			queryConditions = append(queryConditions, "AND status = ?")
-		} else {
-			queryConditions = append(queryConditions, "status = ?")
-		}
-		queryValues = append(queryValues, status)
-	}
-
-	// 构造查询字符串
-	queryStr := strings.Join(queryConditions, " ")
-	date, err := dao.KubernetesClusterDao.List(queryStr, queryValues)
-	fmt.Println(date)
-	fmt.Println(err)
-	return
-	// 根据存在的条件构造查询
-	if len(queryConditions) > 0 {
-		queryStr := strings.Join(queryConditions, " AND ")
-		date, err := dao.KubernetesClusterDao.List(queryStr, queryValues)
-		if err != nil {
-
-		}
-		fmt.Println(date)
-	}
+	response.SuccessResponseWithMessage(c, list)
 }
