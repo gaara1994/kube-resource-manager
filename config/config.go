@@ -31,6 +31,7 @@ type PostgresDBConfig struct {
 	SSLMode  string `toml:"sslmode"`
 	MaxOpen  int    `toml:"max_open"`
 	MaxIdle  int    `toml:"max_idle"`
+	Debug    string `toml:"debug"`
 }
 
 // MySQLConfig 代表MySQL数据库配置

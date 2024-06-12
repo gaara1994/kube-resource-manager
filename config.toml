@@ -16,6 +16,7 @@ dbname = "test"
 sslmode = "disable" # 或 "require" 如果需要SSL连接
 max_open = 101 # 最大连接数
 max_idle = 50 # 最大空闲连接数
+debug = "info" #info,warn,error,silent
 
 
 # MySQL 数据库配置
