@@ -2,12 +2,13 @@ package db
 
 import (
 	"fmt"
-	"gorm.io/driver/postgres"
-	"gorm.io/gorm"
-	"gorm.io/gorm/logger"
 	"kube-resource-manager/config"
 	"kube-resource-manager/internal/db/models"
 	"log"
+
+	"gorm.io/driver/postgres"
+	"gorm.io/gorm"
+	"gorm.io/gorm/logger"
 )
 
 var DB *gorm.DB
@@ -62,7 +63,7 @@ func InitDb() error {
 
 	//自动迁移
 	DB = db
-	err = db.AutoMigrate(&models.KubernetesCluster{}, &models.K8sNamespace{}, &models.K8sResourceType{}, &models.K8sResourceConfig{}, &models.Permission{}, &models.Role{}, &models.RolePermission{}, &models.User{}, &models.UserRole{})
+	err = db.AutoMigrate(&models.KubernetesCluster{}, &models.KubernetesNamespace{}, &models.K8sResourceType{}, &models.K8sResourceConfig{}, &models.Permission{}, &models.Role{}, &models.RolePermission{}, &models.User{}, &models.UserRole{})
 	if err != nil {
 		return err
 	}

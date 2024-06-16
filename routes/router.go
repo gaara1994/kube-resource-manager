@@ -1,11 +1,12 @@
 package routes
 
 import (
+	"kube-resource-manager/utils/auth"
+
 	"github.com/gin-gonic/gin"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
-	"kube-resource-manager/utils/auth"
 )
 
 // InitRoutes initializes all the necessary routes for the Gin engine.
@@ -30,6 +31,13 @@ func InitRoutes(r *gin.Engine) {
 			v1.PUT("/cluster", KubernetesClusterCtl.PUT)
 			v1.DELETE("/cluster/:id", KubernetesClusterCtl.DELETE)
 			v1.GET("/cluster/list", KubernetesClusterCtl.QueryList)
+
+			//名称空间
+			v1.GET("/namespace/:id", KubernetesNamespaceCtl.GET)
+			v1.POST("/namespace", KubernetesNamespaceCtl.POST)
+			v1.PUT("/namespace", KubernetesNamespaceCtl.PUT)
+			v1.DELETE("/namespace/:id", KubernetesNamespaceCtl.DELETE)
+			v1.GET("/namespace/list", KubernetesNamespaceCtl.QueryList)
 
 			//资源分类
 			v1.GET("/resource/type")

@@ -5,29 +5,29 @@ import (
 	"kube-resource-manager/internal/db/models"
 )
 
-var KubernetesClusterDao *kubernetesCluster
+var KubernetesNamespaceDao *KubernetesNamespace
 
-type kubernetesCluster struct {
+type KubernetesNamespace struct {
 }
 
-func (kc *kubernetesCluster) Get(id uint) (*models.KubernetesCluster, error) {
-	m := new(models.KubernetesCluster)
+func (kn *KubernetesNamespace) Get(id uint) (*models.KubernetesNamespace, error) {
+	m := new(models.KubernetesNamespace)
 	return m, db.DB.Table(m.TableName()).Where("id = ?", id).Find(m).Error
 }
 
-func (kc *kubernetesCluster) Save(m *models.KubernetesCluster) error {
+func (kn *KubernetesNamespace) Save(m *models.KubernetesNamespace) error {
 	return db.DB.Table(m.TableName()).Save(m).Error
 }
 
-func (kc *kubernetesCluster) Delete(id uint) error {
-	m := new(models.KubernetesCluster)
+func (kn *KubernetesNamespace) Delete(id uint) error {
+	m := new(models.KubernetesNamespace)
 	return db.DB.Table(m.TableName()).Where("id = ?", id).Delete(m).Error
 }
 
-func (kc *kubernetesCluster) List(clusterName string, description string, status string, page int, pageSize int) ([]models.KubernetesCluster, error) {
-	var clusters []models.KubernetesCluster
+func (kn *KubernetesNamespace) List(clusterName string, description string, status string, page int, pageSize int) ([]models.KubernetesNamespace, error) {
+	var clusters []models.KubernetesNamespace
 	offset := (page - 1) * pageSize
-	query := db.DB.Model(&models.KubernetesCluster{})
+	query := db.DB.Model(&models.KubernetesNamespace{})
 
 	if clusterName != "" {
 		query = query.Where("cluster_name like ?", "%"+clusterName+"%")
