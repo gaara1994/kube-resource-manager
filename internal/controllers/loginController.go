@@ -34,7 +34,7 @@ func (l *LoginController) Login(c *gin.Context) {
 		response.HandleErrorAndRespond(c, err, errcodes.UserErrLoginPassword, errcodes.UserErrMsg[errcodes.UserErrLoginPassword])
 		return
 	}
-	token, err := generateToken(user)
+	token, err := auth.GenerateToken(user)
 	if err != nil {
 		response.HandleErrorAndRespond(c, err, errcodes.UserErrLoginPassword, errcodes.UserErrMsg[errcodes.UserErrLoginPassword])
 		return

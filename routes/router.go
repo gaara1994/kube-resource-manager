@@ -5,6 +5,7 @@ import (
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
+	"kube-resource-manager/utils/auth"
 )
 
 // InitRoutes initializes all the necessary routes for the Gin engine.
@@ -19,6 +20,7 @@ func InitRoutes(r *gin.Engine) {
 	r.GET("/healthz", HealthCheck)
 
 	api := r.Group("api")
+	api.Use(auth.AuthMiddleware())
 	{
 		v1 := api.Group("v1")
 		{
