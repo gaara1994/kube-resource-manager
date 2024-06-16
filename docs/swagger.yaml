@@ -1,0 +1,37 @@
+info:
+  contact: {}
+paths:
+  /api/v1/cluster/{id}/:
+    get:
+      consumes:
+      - application/json
+      description: path params
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - text/plain
+      responses:
+        "200":
+          description: answer
+          schema:
+            type: string
+        "400":
+          description: ok
+          schema:
+            type: string
+        "404":
+          description: ok
+          schema:
+            type: string
+        "500":
+          description: ok
+          schema:
+            type: string
+      summary: path params example
+      tags:
+      - example
+swagger: "2.0"

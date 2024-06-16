@@ -18,3 +18,7 @@ func (u *User) BeforeSave(_ *gorm.DB) error {
 	// u.Password = hashedPassword(u.Password)
 	return nil
 }
+
+func (u *User) TableName() string {
+	return "users"
+}

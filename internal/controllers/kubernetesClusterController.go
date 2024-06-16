@@ -14,6 +14,19 @@ import (
 type KubernetesClusterController struct {
 }
 
+// GET PathParamsExample godoc
+//
+//	@Summary		path params example
+//	@Description	path params
+//	@Tags			example
+//	@Accept			json
+//	@Produce		plain
+//	@Param			id			path		int		true	"id"
+//	@Success		200			{string}	string	"answer"
+//	@Failure		400			{string}	string	"ok"
+//	@Failure		404			{string}	string	"ok"
+//	@Failure		500			{string}	string	"ok"
+//	@Router			/api/v1/cluster/{id}/ [get]
 func (k *KubernetesClusterController) GET(c *gin.Context) {
 	idStr := c.Param("id")
 	id, err := strconv.Atoi(idStr)
@@ -22,7 +35,7 @@ func (k *KubernetesClusterController) GET(c *gin.Context) {
 		return
 	}
 	//查库
-	data, err := dao.KubernetesClusterDao.GET(uint(id))
+	data, err := dao.KubernetesClusterDao.Get(uint(id))
 	if err != nil {
 		response.HandleErrorAndRespond(c, err, errcodes.ClusterErrGet, errcodes.ClusterErrMsg[errcodes.ClusterErrGet])
 		return
@@ -97,7 +110,7 @@ func (k *KubernetesClusterController) DELETE(c *gin.Context) {
 		return
 	}
 	//删除
-	err = dao.KubernetesClusterDao.DELETE(uint(id))
+	err = dao.KubernetesClusterDao.Delete(uint(id))
 	if err != nil {
 		response.HandleErrorAndRespond(c, err, errcodes.ClusterErrDelete, errcodes.ClusterErrMsg[errcodes.ClusterErrDelete])
 		return

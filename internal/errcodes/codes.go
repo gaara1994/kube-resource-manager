@@ -86,15 +86,23 @@ const (
 	UserErrPut
 	UserErrGet
 	UserErrQueryList
+	UserErrLogin
+	UserErrLoginPassword
+	UserErrUserExisting
+	UserErrUserNotExisting
 	// ... 可以继续添加其他集群相关的状态码
 )
 
 var UserErrMsg = map[int]string{
-	UserErrPost:      "用户添加失败",
-	UserErrDelete:    "用户删除失败",
-	UserErrPut:       "用户修改失败",
-	UserErrGet:       "用户查询失败",
-	UserErrQueryList: "用户列表查询失败Config",
+	UserErrPost:            "用户添加失败",
+	UserErrDelete:          "用户删除失败",
+	UserErrPut:             "用户修改失败",
+	UserErrGet:             "用户查询失败",
+	UserErrQueryList:       "用户列表查询失败Config",
+	UserErrLogin:           "用户登录失败",
+	UserErrLoginPassword:   "账号或密码错误",
+	UserErrUserExisting:    "账号已存在",
+	UserErrUserNotExisting: "账号不存在",
 }
 
 // 角色类业务状态码 40400 开始

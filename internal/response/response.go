@@ -3,7 +3,6 @@ package response
 import (
 	"github.com/gin-gonic/gin"
 	"kube-resource-manager/internal/errcodes"
-	"kube-resource-manager/pkg/logger"
 	"net/http"
 )
 
@@ -40,9 +39,6 @@ func SuccessResponseWithMessage(c *gin.Context, data interface{}) {
 }
 
 func HandleErrorAndRespond(c *gin.Context, err error, errorCode int, errorMessage string) {
-	if err != nil {
-		logger.Log.Error(err.Error())
-		ErrorResponseWithMessage(c, errorCode, errorMessage)
-		c.Abort() // 确保后续操作不会被执行
-	}
+	ErrorResponseWithMessage(c, errorCode, errorMessage)
+	c.Abort() // 确保后续操作不会被执行
 }

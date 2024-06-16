@@ -3,10 +3,15 @@ package routes
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 // InitRoutes initializes all the necessary routes for the Gin engine.
 func InitRoutes(r *gin.Engine) {
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+	//r.Get("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, ginSwagger.URL("/swagger/doc.json")))
+
 	// 添加 Prometheus metrics 路由
 	r.GET("/metrics", gin.WrapH(promhttp.Handler()))
 
@@ -37,7 +42,14 @@ func InitRoutes(r *gin.Engine) {
 			v1.PUT("/resource/config")
 			v1.DELETE("/resource/config")
 			v1.GET("/resource/config/list")
+
+			//用户
+			v1.POST("/user", UserCtl.Post)
+
 		}
 	}
+
+	//登录
+	r.POST("/login", LoginCtl.Login)
 
 }

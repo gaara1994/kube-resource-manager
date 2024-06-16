@@ -5,29 +5,34 @@ import (
 	"kube-resource-manager/internal/db/models"
 )
 
-var KubernetesClusterDao *kubernetesCluster
+var UserDao *user
 
-type kubernetesCluster struct {
+type user struct {
 }
 
-func (k *kubernetesCluster) Get(id uint) (*models.KubernetesCluster, error) {
-	m := new(models.KubernetesCluster)
+func (u *user) Get(id uint) (*models.User, error) {
+	m := new(models.User)
 	return m, db.DB.Table(m.TableName()).Where("id = ?", id).Find(m).Error
 }
 
-func (k *kubernetesCluster) Save(m *models.KubernetesCluster) error {
+func (u *user) GetByUsername(Username string) (*models.User, error) {
+	m := new(models.User)
+	return m, db.DB.Table(m.TableName()).Where("user_name = ?", Username).Find(m).Error
+}
+
+func (u *user) Save(m *models.User) error {
 	return db.DB.Table(m.TableName()).Save(m).Error
 }
 
-func (k *kubernetesCluster) Delete(id uint) error {
-	m := new(models.KubernetesCluster)
+func (u *user) DELETE(id uint) error {
+	m := new(models.User)
 	return db.DB.Table(m.TableName()).Where("id = ?", id).Delete(m).Error
 }
 
-func (k *kubernetesCluster) List(clusterName string, description string, status string, page int, pageSize int) ([]models.KubernetesCluster, error) {
-	var clusters []models.KubernetesCluster
+func (u *user) List(clusterName string, description string, status string, page int, pageSize int) ([]models.User, error) {
+	var clusters []models.User
 	offset := (page - 1) * pageSize
-	query := db.DB.Model(&models.KubernetesCluster{})
+	query := db.DB.Model(&models.User{})
 
 	if clusterName != "" {
 		query = query.Where("cluster_name like ?", "%"+clusterName+"%")
