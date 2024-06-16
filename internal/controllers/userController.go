@@ -1,13 +1,13 @@
 package controllers
 
 import (
-	"fmt"
-	"github.com/gin-gonic/gin"
 	"kube-resource-manager/internal/dao"
 	"kube-resource-manager/internal/dto"
 	"kube-resource-manager/internal/errcodes"
 	"kube-resource-manager/internal/response"
 	"kube-resource-manager/utils/auth"
+
+	"github.com/gin-gonic/gin"
 )
 
 type UserController struct {
@@ -30,7 +30,6 @@ func (u *UserController) Post(c *gin.Context) {
 		response.HandleErrorAndRespond(c, err, errcodes.UserErrPost, errcodes.UserErrMsg[errcodes.UserErrPost])
 		return
 	}
-	fmt.Println(user.ID)
 	if user.ID != 0 {
 		//用户已经存在
 		response.ErrorResponseWithMessage(c, errcodes.UserErrUserExisting, errcodes.UserErrMsg[errcodes.UserErrUserExisting])
