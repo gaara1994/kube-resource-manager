@@ -43,15 +43,15 @@ func InitRoutes(r *gin.Engine) {
 			v1.GET("/resource/type/:id", KubernetesResourceTypeCtl.GET)
 			v1.POST("/resource/type", KubernetesResourceTypeCtl.POST)
 			v1.PUT("/resource/type", KubernetesResourceTypeCtl.PUT)
-			v1.DELETE("/resource/type", KubernetesResourceTypeCtl.DELETE)
+			v1.DELETE("/resource/type/:id", KubernetesResourceTypeCtl.DELETE)
 			v1.GET("/resource/type/list", KubernetesResourceTypeCtl.QueryList)
 
 			//资源文件
-			v1.GET("/resource/config")
-			v1.POST("/resource/config")
-			v1.PUT("/resource/config")
-			v1.DELETE("/resource/config")
-			v1.GET("/resource/config/list")
+			v1.GET("/resource/config/:id", KubernetesResourceConfigCtl.GET)
+			v1.POST("/resource/config", KubernetesResourceConfigCtl.POST)
+			v1.PUT("/resource/config", KubernetesResourceConfigCtl.PUT)
+			v1.DELETE("/resource/config/:id", KubernetesResourceConfigCtl.DELETE)
+			v1.GET("/resource/config/list", KubernetesResourceConfigCtl.QueryList)
 
 			//用户
 			v1.POST("/user", UserCtl.Post)

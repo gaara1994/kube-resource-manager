@@ -7,9 +7,11 @@ import (
 // KubernetesResourceConfig 代表Kubernetes资源配置的GORM模型
 type KubernetesResourceConfig struct {
 	BaseModel
-	ResourceTypeID uint   `json:"resource_type_id" gorm:"column:resource_type_id;not null;comment:资源类型ID"`         // 资源类型ID，与k8s_resource_types表的外键关联
-	YamlContent    string `json:"yaml_content" gorm:"column:yaml_content;type:text;not null;comment:YAML配置内容"` // YAML配置内容，使用TEXT类型存储大文本，非空
-	Description    string `json:"description" gorm:"column:description;type:text;comment:配置描述信息"`             // 配置描述信息，可选
+	ResourceClusterID   uint   `json:"resource_cluster_id" gorm:"column:resource_cluster_id;not null;comment:资源类型ID"`     // 资源类型ID，与k8s_resource_types表的外键关联
+	ResourceNamespaceID uint   `json:"resource_namespace_id" gorm:"column:resource_namespace_id;not null;comment:资源类型ID"` // 资源类型ID，与k8s_resource_types表的外键关联
+	ResourceTypeID      uint   `json:"resource_type_id" gorm:"column:resource_type_id;not null;comment:资源类型ID"`           // 资源类型ID，与k8s_resource_types表的外键关联
+	YamlContent         string `json:"yaml_content" gorm:"column:yaml_content;type:text;not null;comment:YAML配置内容"`       // YAML配置内容，使用TEXT类型存储大文本，非空
+	Description         string `json:"description" gorm:"column:description;type:text;comment:配置描述信息"`                    // 配置描述信息，可选
 }
 
 // BeforeCreate 钩子，在创建记录前执行

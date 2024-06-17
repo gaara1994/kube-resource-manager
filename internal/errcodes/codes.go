@@ -72,11 +72,11 @@ const (
 )
 
 var ResourceConfigErrMsg = map[int]string{
-	ResourceConfigErrPost:      "资源类型添加失败",
-	ResourceConfigErrDelete:    "资源类型删除失败",
-	ResourceConfigErrPut:       "资源类型修改失败",
-	ResourceConfigErrGet:       "资源类型查询失败",
-	ResourceConfigErrQueryList: "资源类型列表查询失败Config",
+	ResourceConfigErrPost:      "资源配置添加失败",
+	ResourceConfigErrDelete:    "资源配置删除失败",
+	ResourceConfigErrPut:       "资源配置修改失败",
+	ResourceConfigErrGet:       "资源配置查询失败",
+	ResourceConfigErrQueryList: "资源配置列表查询失败Config",
 }
 
 // 用户类业务状态码 40400 开始
