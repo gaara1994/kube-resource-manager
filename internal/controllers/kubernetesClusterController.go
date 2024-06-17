@@ -2,7 +2,6 @@ package controllers
 
 import (
 	"github.com/gin-gonic/gin"
-	"gorm.io/gorm"
 	"kube-resource-manager/internal/dao"
 	"kube-resource-manager/internal/db/models"
 	dto "kube-resource-manager/internal/dto"
@@ -76,7 +75,7 @@ func (k *KubernetesClusterController) POST(c *gin.Context) {
 }
 
 func (k *KubernetesClusterController) PUT(c *gin.Context) {
-	req := dto.PostClusterRequest{}
+	req := models.KubernetesCluster{}
 	err := c.BindJSON(&req)
 	if err != nil {
 		response.HandleErrorAndRespond(c, err, errcodes.ClusterErrPost, errcodes.ClusterErrMsg[errcodes.ClusterErrPost])
@@ -86,19 +85,8 @@ func (k *KubernetesClusterController) PUT(c *gin.Context) {
 	//校验
 
 	//赋值
-	clusterModel := models.KubernetesCluster{
-		Model: gorm.Model{
-			ID: req.ID,
-		},
-		ClusterName: req.ClusterName,
-		APIEndpoint: req.APIEndpoint,
-		KubeConfig:  req.KubeConfig,
-		Version:     req.Version,
-		Status:      models.KubernetesClusterStatus(req.Status),
-		Description: req.Description,
-	}
 	//入库
-	err = dao.KubernetesClusterDao.Save(&clusterModel)
+	err = dao.KubernetesClusterDao.Save(&req)
 	if err != nil {
 		response.HandleErrorAndRespond(c, err, errcodes.ClusterErrPost, errcodes.ClusterErrMsg[errcodes.ClusterErrPost])
 		return
