@@ -1,12 +1,8 @@
 package models
 
-import (
-	"gorm.io/gorm"
-)
-
 // KubernetesNamespace 代表Kubernetes集群的GORM模型
 type KubernetesNamespace struct {
-	gorm.Model
+	BaseModel
 	Name        string   `gorm:"column:name;not null;comment:命名空间名称"` // 命名空间名称，唯一且非空
 	ClusterID   uint     `gorm:"column:cluster_id;not null;comment:集群id"`
 	Description string   `gorm:"column:description;comment:描述"`

@@ -40,6 +40,10 @@ func (k *KubernetesClusterController) GET(c *gin.Context) {
 		response.HandleErrorAndRespond(c, err, errcodes.ClusterErrGet, errcodes.ClusterErrMsg[errcodes.ClusterErrGet])
 		return
 	}
+	if data.ID == 0 {
+		response.SuccessResponseWithMessage(c, nil)
+		return
+	}
 	response.SuccessResponseWithMessage(c, data)
 }
 

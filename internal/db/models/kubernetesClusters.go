@@ -1,9 +1,5 @@
 package models
 
-import (
-	"gorm.io/gorm"
-)
-
 // KubernetesClusterStatus 定义了集群状态的枚举类型
 type KubernetesClusterStatus string
 
@@ -15,7 +11,7 @@ const (
 
 // KubernetesCluster 代表Kubernetes集群的GORM模型
 type KubernetesCluster struct {
-	gorm.Model
+	BaseModel
 	ClusterName string                  `gorm:"column:cluster_name;size:256;unique;not null;comment:集群名称"` // 设置ClusterName为唯一且非空
 	APIEndpoint string                  `gorm:"column:api_endpoint;size:256;comment:APIEndpoint"`          // API Endpoint必须填写
 	KubeConfig  string                  `gorm:"column:kube_config;comment:KubeConfig"`                     // 可选，KubeConfig的Base64编码

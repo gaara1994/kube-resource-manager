@@ -63,7 +63,7 @@ func InitDb() error {
 
 	//自动迁移
 	DB = db
-	err = db.AutoMigrate(&models.KubernetesCluster{}, &models.KubernetesNamespace{}, &models.K8sResourceType{}, &models.K8sResourceConfig{}, &models.Permission{}, &models.Role{}, &models.RolePermission{}, &models.User{}, &models.UserRole{})
+	err = db.AutoMigrate(&models.KubernetesCluster{}, &models.KubernetesNamespace{}, &models.KubernetesResourceType{}, &models.KubernetesResourceConfig{}, &models.Permission{}, &models.Role{}, &models.RolePermission{}, &models.User{}, &models.UserRole{})
 	if err != nil {
 		return err
 	}

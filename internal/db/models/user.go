@@ -6,7 +6,7 @@ import (
 
 // User 代表用户模型
 type User struct {
-	gorm.Model
+	BaseModel
 	Username     string `gorm:"column:user_name;not null;uniqueIndex;comment:用户名"` // 用户名，设置为唯一索引
 	PasswordHash string `gorm:"column:password_hash;not null;comment:密码散列值"`       // 密码散列值
 	Email        string `gorm:"column:email;comment:邮箱"`                           // 邮箱，设置为唯一索引

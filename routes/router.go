@@ -40,11 +40,11 @@ func InitRoutes(r *gin.Engine) {
 			v1.GET("/namespace/list", KubernetesNamespaceCtl.QueryList)
 
 			//资源分类
-			v1.GET("/resource/type")
-			v1.POST("/resource/type")
-			v1.PUT("/resource/type")
-			v1.DELETE("/resource/type")
-			v1.GET("/resource/type/list")
+			v1.GET("/resource/type/:id", KubernetesResourceTypeCtl.GET)
+			v1.POST("/resource/type", KubernetesResourceTypeCtl.POST)
+			v1.PUT("/resource/type", KubernetesResourceTypeCtl.PUT)
+			v1.DELETE("/resource/type", KubernetesResourceTypeCtl.DELETE)
+			v1.GET("/resource/type/list", KubernetesResourceTypeCtl.QueryList)
 
 			//资源文件
 			v1.GET("/resource/config")

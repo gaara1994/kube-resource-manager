@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"kube-resource-manager/internal/dao"
 	"kube-resource-manager/internal/db/models"
 	"kube-resource-manager/internal/errcodes"
@@ -59,6 +60,7 @@ func (k *KubernetesNamespaceController) POST(c *gin.Context) {
 	//赋值
 
 	//入库
+	fmt.Println("req=", req)
 	err = dao.KubernetesNamespaceDao.Save(&req)
 	if err != nil {
 		response.HandleErrorAndRespond(c, err, errcodes.NamespaceErrPost, errcodes.NamespaceErrMsg[errcodes.NamespaceErrPost])
