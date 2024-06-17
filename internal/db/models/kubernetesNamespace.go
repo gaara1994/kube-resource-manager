@@ -14,5 +14,5 @@ type KubernetesNamespace struct {
 }
 
 func (kn *KubernetesNamespace) TableName() string {
-	return "k8s_namespaces"
+	return "kubernetes_namespaces"
 }
